@@ -1,14 +1,16 @@
-class Element(object):
-    def agg_state(self, unit, t):
+class Element():
+    def convertation(self, unit, t):
         if unit == 'kel':
-            t = t - 273.15
+            return t - 273.15
         elif unit == 'fa':
-            t = (t-32) / 1.8
+            return (t-32) / 1.8
         elif unit == 'cel':
-            pass
-        if t < self.tFreeze:
+            return t
+    def agg_state(self, unit, t):
+        t = self.convertation(unit, t)
+        if t <= self.tFreeze:
             return print('Твёрдый')
-        elif t == self.tMelt:
+        elif t < self.tVaporization:
             return print('Жидкий')
         elif t >= self.tVaporization:
             return print('Газообразный')
